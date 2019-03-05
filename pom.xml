@@ -210,7 +210,7 @@
         <dependency>
             <groupId>com.lr</groupId>
             <artifactId>sjblog-common</artifactId>
-            <version>1.0.2019.2.14</version>
+            <version>1.0.2019</version>
         </dependency>
 
     </dependencies>

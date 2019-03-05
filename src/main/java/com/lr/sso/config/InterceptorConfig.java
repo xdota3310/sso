@@ -15,19 +15,22 @@ import javax.servlet.http.HttpServletResponse;
  */
 public class InterceptorConfig implements HandlerInterceptor {
     private static final Logger LOGGER = LoggerFactory.getLogger(InterceptorConfig.class);
+
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
         response.setHeader("Access-Control-Allow-Origin", "*");
 
-        response.setHeader("Access-Control-Allow-Headers", "Content-Type" );
+        response.setHeader("Access-Control-Allow-Headers", "Content-Type");
 
-        response.setHeader("Access-Control-Allow-Methods","PUT,POST,GET,DELETE,OPTIONS");
+        response.setHeader("Access-Control-Allow-Methods", "PUT,POST,GET,DELETE,OPTIONS");
 
-        response.setHeader("X-Powered-By","Jetty");
+        response.setHeader("X-Powered-By", "Jetty");
 
-        String method= request.getMethod();
+        String method = request.getMethod();
 
         LOGGER.warn(method);
+
+
         return true;
     }
 }
