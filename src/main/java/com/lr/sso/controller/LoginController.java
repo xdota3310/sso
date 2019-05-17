@@ -37,6 +37,14 @@ public class LoginController {
     @Autowired
     RedisService redisService;
 
+    /**
+     * 邮箱、手机统一登录
+     * @param request
+     * @param response
+     * @param redirectAttributes
+     * @param userLoginVO
+     * @return
+     */
     @RequestMapping("/doLogin")
     @ResponseBody
     public ResultResponse doLogin(HttpServletRequest request, HttpServletResponse response,
@@ -56,14 +64,14 @@ public class LoginController {
             } catch (Exception e) {
                 LOGGER.error("userToken: " + userToken.toString());
                 LOGGER.error(e.toString());
-                return ResultResponse.createByError("-1", "登录失败！");
+                return ResultResponse.createByError(ResultResponse.EXCEPTIONFAIL, "登录失败！");
             }
             redisService.put(userInfo.getUserName(), token);
             redisService.put(RredisConstant.USER_INFO_PREFIX + userInfo.getUserName(), userInfo);
 
             return ResultResponse.createBySuccess(new UserLoginInfo(userInfo, token));
         } else {
-            return ResultResponse.createByError("-1", "登录失败！");
+            return ResultResponse.createByError(ResultResponse.BUISSNESSFAIL, "登录失败！");
         }
     }
 

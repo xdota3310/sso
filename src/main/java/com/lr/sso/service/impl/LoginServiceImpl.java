@@ -35,16 +35,16 @@ public class LoginServiceImpl implements LoginService {
             } else if(userName != null) {
                 user.setUserName(userName);
             } else {
-                return ResultResponse.createByError("-2", "账号不能为空！");
+                return ResultResponse.createByError(ResultResponse.BUISSNESSFAIL, "账号不能为空！");
             }
             UserInfo userInfo = userMapper.selectByPrimaryKey(user);
             if(userInfo != null && userInfo.getPassword() != null && userLoginVO.getPassWord().trim().equals(userInfo.getPassword().trim())) {
                 return ResultResponse.createBySuccess(userInfo);
             } else {
-                return ResultResponse.createByError("-2", "用户名或密码错误");
+                return ResultResponse.createByError(ResultResponse.BUISSNESSFAIL, "用户名或密码错误");
             }
         } else {
-            return ResultResponse.createByError("-1", "invalid login");
+            return ResultResponse.createByError(ResultResponse.EXCEPTIONFAIL, "invalid login");
         }
     }
 }
