@@ -4,6 +4,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.servlet.HandlerInterceptor;
 
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -18,15 +19,17 @@ public class InterceptorConfig implements HandlerInterceptor {
 
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
-        response.setHeader("Access-Control-Allow-Origin", "*");
+        response.setHeader("Access-Control-Allow-Origin", "http://www.sso.sjsite.com:8081");
 
-        response.setHeader("Access-Control-Allow-Headers", "Content-Type,Access-Control-Allow-Origin,request-ajax");
+        response.setHeader("Access-Control-Allow-Headers", "Content-Type,Access-Control-Allow-Origin,request-ajax,Access-Control-Allow-Credentials");
 
         response.setHeader("Access-Control-Allow-Methods", "PUT,POST,GET,DELETE,OPTIONS");
 
         response.setHeader("X-Powered-By", "Jetty");
 
         String method = request.getMethod();
+
+        Cookie[] cookies = request.getCookies();
 
         LOGGER.warn(method);
 
