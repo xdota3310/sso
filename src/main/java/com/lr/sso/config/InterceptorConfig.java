@@ -19,9 +19,11 @@ public class InterceptorConfig implements HandlerInterceptor {
 
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
-        response.setHeader("Access-Control-Allow-Origin", "http://www.sso.sjsite.com:8081");
+        response.setHeader("Access-Control-Allow-Origin", "http://www.sso.sjsite.com");
 
         response.setHeader("Access-Control-Allow-Headers", "Content-Type,Access-Control-Allow-Origin,request-ajax,Access-Control-Allow-Credentials");
+
+        response.setHeader("Access-Control-Allow-Credentials","true");
 
         response.setHeader("Access-Control-Allow-Methods", "PUT,POST,GET,DELETE,OPTIONS");
 
@@ -32,8 +34,9 @@ public class InterceptorConfig implements HandlerInterceptor {
         Cookie[] cookies = request.getCookies();
 
         LOGGER.warn(method);
-
-
+        if(cookies != null){
+            LOGGER.error(cookies.toString());
+        }
         return true;
     }
 }
